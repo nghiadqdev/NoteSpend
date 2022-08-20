@@ -1,0 +1,6 @@
+module Pods_NoteSpend {
+  umbrella header "Pods-NoteSpend-umbrella.h"
+
+  export *
+  module * { export * }
+}

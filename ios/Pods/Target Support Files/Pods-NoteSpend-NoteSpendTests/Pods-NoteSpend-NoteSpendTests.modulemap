@@ -1,0 +1,6 @@
+module Pods_NoteSpend_NoteSpendTests {
+  umbrella header "Pods-NoteSpend-NoteSpendTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
