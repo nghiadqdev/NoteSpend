@@ -1,14 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+/**
+ * @format
+ */
+import 'react-native-gesture-handler';
+import React, { FC } from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StyleSheet, StatusBar } from 'react-native';
+import RootNavigation from './screen/RootNavigation';
 
-const HomeIndex = () => {
+const App: FC = () => {
+    const handleCompleteLoadData = () => {
+        StatusBar.setHidden(false);
+        // RNBootSplash.hide({ fade: true });
+    };
+
     return (
-        <View>
-            <Text>HomeIndex</Text>
-        </View>
+        <SafeAreaProvider>
+            <RootNavigation onCompleteLoading={handleCompleteLoadData} />
+        </SafeAreaProvider>
     )
 }
 
-export default HomeIndex
+const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        justifyContent: 'center',
+        position: 'absolute',
+        zIndex: 999,
+        width: '100%',
+        height: '100%'
+    }
+})
+export default App;
+ // export default codePush(codePushOptions)(App);
 
-const styles = StyleSheet.create({})
