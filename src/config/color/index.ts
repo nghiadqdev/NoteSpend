@@ -1,12 +1,16 @@
 const COLORS = {
     primary: "#eaba00",
+    originF4: '#F4AF60',
     bgGray: "#ccc",
     white: '#FFFFFF',
     black: '#000000',
     redee1c1c: '#ee1c1c',
+    redDB7093: '#DB7093',
 
     gre39ee1c: '#39ee1c',
-    gre23CF8A: '#23CF8A',
+    gre80FF80: '#80FF80',
+
+    velvetViolet: '#874080',
 
     ylfaebd7: '#faebd7',
 

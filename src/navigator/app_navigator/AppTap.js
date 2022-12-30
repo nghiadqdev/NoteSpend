@@ -80,7 +80,7 @@ export default function AppTab() {
         <Tab.Navigator tabBar={(props) => <BottomTab {...props} />} screenOptions={{ headerShown: false }}>
             <Tab.Screen name={"HomeTab"} component={HomeStack} />
             {/* <Tab.Screen name={"ChatTab"} component={ChatStack} />
-            <Tab.Screen name={"HistoryTab"} component={HistoryStack} />
+            <Tab.Screen name={"HistoryTab"} component={HistoryStack} /> 
             <Tab.Screen name={"UserStack"} component={UserStack} /> */}
         </Tab.Navigator>
     );

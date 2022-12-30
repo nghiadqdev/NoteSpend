@@ -2,24 +2,26 @@ const languageResource = {
   vi: {
     spending: 'Chi tiêu',
     name: 'Tên',
-    mHave: 'Cần thiết',
-    nTHave: 'Có thì tốt',
-    wasted: 'Lãng phí',
+    MushHave: 'Cần thiết',
+    NiceToHave: 'Có thì tốt',
+    Wasted: 'Lãng phí',
     update: 'Cập nhật',
     stChart: 'Biểu đồ theo dõi chi tiêu',
+    total: 'Tổng cộng',
   },
   en: {
     spending: 'Spending',
     name: 'Name',
-    mHave: 'Must have',
-    nTHave: 'Nice to have',
-    wasted: 'Wasted',
+    MushHave: 'Must have',
+    NiceToHave: 'Nice to have',
+    Wasted: 'Wasted',
     update: 'Update',
     stChart: 'Spend tracking chart',
+    total: 'Total',
   }
 }
-type keys = 'spending' | 'name' | 'mHave'
-  | 'nTHave' | 'wasted' | 'update' | 'stChart';
+type keys = 'spending' | 'name' | 'MushHave'
+  | 'NiceToHave' | 'Wasted' | 'update' | 'stChart' | 'total';
 export type Shape = {
   [key in keys]?: string;
 }

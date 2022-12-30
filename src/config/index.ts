@@ -2,9 +2,9 @@ import { Dimensions, Keyboard, Platform, StatusBar, KeyboardEvent } from 'react-
 import COLORS from './color'
 import IMAGES from './image'
 import { fonts, fontScale } from './font'
-import { screens, KeyHeader } from './constants'
+import { screens, KeyHeader, listDailyColor } from './constants'
 import { FC } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -54,7 +54,7 @@ const isIOS = Platform.OS === 'ios';
 function getBottomSpace() {
     return isIphoneX() ? 34 : 0;
 }
-const normalize = (fontSize: number, standardScreenHeight = 680) => {
+const normalize = (fontSize: number, standardScreenHeight = 680): number => {
     const standardLength = width > height ? width : height;
     const offset = width > height ? 0 : Platform.OS === 'ios' ? 78 : StatusBar.currentHeight || 0;
     const dvHeight =
@@ -105,7 +105,44 @@ const setObjectStore = async (key: string, value: any) => {
 };
 const _keyExtractor = (_: any, index: { toString: () => any; }) => index.toString()
 const ITEMSPERPAGE = 10
+const formatMoneyVND = money => {
+    if (money && money.toString().length > 0) {
+        return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + " VNĐ";
+    } else {
+        return money + " VNĐ";
+    }
+};
+const formatMoneyD = money => {
+    if (!!money || money == 0) {
+        if (money && money.toString().length > 0) {
+            return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + "đ";
+        } else {
+            return money + "đ";
+        }
+    } else {
+        return ''
+    }
+};
+const formatMoneyVNDInput = money => {
+    let v = money ? money.toString() : '';
+    if (v.length > 0) {
+        if (v.indexOf('0') === 0 && v.length > 1)
+            v = v.slice(1)
+        if (v.indexOf(',') !== -1) {
+            v = v.replaceAll(',', '');
+        }
+        return v.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    } else {
+        return '';
+    }
+};
 
+function replaceMoney(str: string) {
+    if (str && typeof str == 'string')
+        return str.replace(/\./g, '');
+    else
+        return '0'
+}
 
 export {
     COLORS,
@@ -122,8 +159,45 @@ export {
     ITEMSPERPAGE,
     isIOS,
     fontScale,
+    listDailyColor,
     setStringStore,
     setObjectStore,
     getStringData,
-    getObjectData
+    getObjectData,
+    formatMoneyD,
+    formatMoneyVND,
+    formatMoneyVNDInput,
+    replaceMoney
 }
+
+
+
+// if (gestureState.dy > 0) {
+//     // console.log('---------------end drag dow', posY)
+//     let temp = Object.values(positionOffset).filter(i => i.index >= posY && i.index < 5)
+//     for (const element of temp) {
+
+//       // }
+//       // for (let index = posY; index < 5; index++) {
+//       console.log(element, '---------------temp')
+//       // const element = temp.find(i => i.index == index) //vector to item have index equal posY
+//       if (!!element) {
+//         tempOffset = { ...tempOffset, [element.key]: { ...element, index: element.index + 1, top: element.index !== posY } }
+//         console.log(element.key, '-----------------------------end dow', tempOffset.pan3)
+//         Animated.spring(element.value, { toValue: { y: temp1, x: 0 }, useNativeDriver: false }).start()
+//         if (!element.bot)
+//           return
+//       }
+//     }
+//     setPositionOffset({ ...tempOffset })
+//   } else {
+//     console.log('---------------end drag up', posY)
+//     let temp = Object.values(positionOffset).filter(i => i.index <= posY)
+//     for (let index = posY; index >= 0; index--) {
+//       const element = temp.find(i => i.index == index)
+//       if (!!element) {
+//         tempOffset = { ...tempOffset, [element.key]: { ...element, index: index - 1, bot: index !== posY } }
+//         Animated.spring(element.value, { toValue: { y: temp2, x: 0 }, useNativeDriver: false }).start()
+//         if (!element.top) return
+//       }
+//     }
